@@ -20,10 +20,14 @@ libmy_qsort.so: my_qsort.o
 my_qsort.o: my_qsort.c
 	$(CC) -fPIC -c -o $@ $^ $(CWARN)
 
+wheel: libmy_qsort.so
+	python setup.py bdist_wheel
+	pip install dist/*
+
 .PHONY: clean
 
 clean:
-	rm -f my_qsort.o $(LIB_DIR)libmy_qsort.so $(TEST_DIR)test
+	rm -rf my_qsort.o $(LIB_DIR)libmy_qsort.so $(TEST_DIR)test dist build my_qsort.egg-info
 
 test: libmy_qsort.so sort
 	LD_LIBRARY_PATH=$(LIB_DIR) ./$(TEST_DIR)$@ && echo "SUCCESS!" || echo "FAILED!"
@@ -34,4 +38,5 @@ sort: $(TEST_DIR)sort.c
 export PYTHON_TEST
 test_wrapper: libmy_qsort.so
 	python -c "$$PYTHON_TEST"
+
 

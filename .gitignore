@@ -1,5 +1,6 @@
 build/*
 dist/*
+.vs/*
 my_qsort.egg-info/*
 */__pycache__/*
 *.o

@@ -17,7 +17,7 @@ def my_sort(arr, compare):
 
     my_qsort.my_qsort(c_arr, len(c_arr), sizeof(c_int), c_compare)
 
-    arr.clear()
+    del arr[:]
     arr.extend(list(c_arr))
 
 def hello():

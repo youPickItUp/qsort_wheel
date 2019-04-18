@@ -13,16 +13,15 @@ else:
 	print("Failure!")
 endef
 
+wheel: libmy_qsort.so
+	python setup.py bdist_wheel
+	pip install dist/*
 
 libmy_qsort.so: my_qsort.o
 	$(CC) -shared -o $(LIB_DIR)$@ $^
 
 my_qsort.o: my_qsort.c
 	$(CC) -fPIC -c -o $@ $^ $(CWARN)
-
-wheel: libmy_qsort.so
-	python setup.py bdist_wheel
-	pip install dist/*
 
 .PHONY: clean
 

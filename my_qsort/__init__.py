@@ -1,9 +1,10 @@
 import os
+from distutils.sysconfig import get_config_var
 from sys import platform
 from ctypes import *
 
-extension = 'so' if platform == "linux" or platform == "linux2" else 'dll'
-lib_path = os.path.join(os.path.dirname(__file__), 'libmy_qsort.' + extension)
+lib_name = 'my_qsort' + get_config_var('EXT_SUFFIX')
+lib_path = os.path.join(os.path.dirname(__file__), lib_name)
 my_qsort = CDLL(lib_path)
 
 def my_sort(arr, compare):

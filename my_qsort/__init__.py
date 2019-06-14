@@ -3,12 +3,7 @@ from distutils.sysconfig import get_config_var
 from sys import platform
 from ctypes import *
 
-lib_name = 'my_qsort'
-suffix = get_config_var('EXT_SUFFIX')
-if suffix:
-    lib_name += get_config_var('EXT_SUFFIX')
-else:
-    lib_name += '.so'
+lib_name = 'my_qsort.so'
 lib_path = os.path.join(os.path.dirname(__file__), lib_name)
 my_qsort = CDLL(lib_path)
 

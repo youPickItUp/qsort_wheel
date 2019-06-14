@@ -2,8 +2,12 @@ import os
 from distutils.sysconfig import get_config_var
 from sys import platform
 from ctypes import *
+from sys import platform
 
-lib_name = 'my_qsort.so'
+if platform.startswith("win"):
+    lib_name = 'my_qsort.dll'
+if platform.startswith("linux"):
+    lib_name = 'my_qsort.so'
 lib_path = os.path.join(os.path.dirname(__file__), lib_name)
 my_qsort = CDLL(lib_path)
 

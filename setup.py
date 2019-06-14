@@ -1,7 +1,7 @@
 from os import system
 from setuptools import setup, Distribution, Extension
 from setuptools.command.build_ext import build_ext
-
+from sys import platform
 
 class build_ext(build_ext):
 
@@ -16,7 +16,10 @@ class build_ext(build_ext):
 
     def get_ext_filename(self, ext_name):
         if ext_name == 'my_qsort':
-            return ext_name + '.so'
+            if platform.startswith("win"):
+                return ext_name + '.dll'
+            if platform.startswith("linux"):
+                return ext_name + '.so'
         return super().get_ext_filename(ext_name)
 
 class CTypes(Extension): pass
